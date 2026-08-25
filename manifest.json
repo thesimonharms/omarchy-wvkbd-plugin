@@ -1,0 +1,21 @@
+{
+  "schemaVersion": 1,
+  "id": "simon.wvkbd",
+  "name": "Virtual Keyboard",
+  "version": "1.0.0",
+  "author": "simon",
+  "description": "Toggle the wvkbd on-screen keyboard from the bar",
+  "kinds": [
+    "bar-widget"
+  ],
+  "entryPoints": {
+    "barWidget": "BarWidget.qml"
+  },
+  "barWidget": {
+    "displayName": "Virtual Keyboard",
+    "description": "Toggle the wvkbd on-screen keyboard from the bar",
+    "category": "Input",
+    "defaultSection": "right",
+    "allowMultiple": false
+  }
+}
