@@ -7,12 +7,15 @@ BarWidget {
   id: root
   moduleName: "omarchy-wvkbd"
 
-  // Landscape keyboard height in pixels; override in the shell.json layout
-  // entry: { "id": "omarchy-wvkbd", "height": 500, "layers": "fullwide" }
+  // Settings are overrides on the shell.json layout entry:
+  // { "id": "omarchy-wvkbd", "height": 500 }
   property int keyboardHeight: setting("height", 400)
-  // wvkbd layer(s), comma-separated. "full" is a traditional PC-style QWERTY
-  // (number row + modifier row). Run `wvkbd-mobintl --list-layers` for choices.
+  // wvkbd layer(s), comma-separated. "full" is the PC-style layout compiled
+  // into wvkbd-pcintl (see wvkbd-pcintl/ in the plugin source).
   property string layers: setting("layers", "full")
+  // The wvkbd variant to launch. Default is the custom PC-layout build;
+  // set to "wvkbd-mobintl" to use the stock phone-style layout instead.
+  property string binary: setting("binary", "wvkbd-pcintl")
 
   property bool keyboardUp: false
 
@@ -20,15 +23,15 @@ BarWidget {
   implicitHeight: button.implicitHeight
 
   function refresh() {
-    if (statusProc.running) return
-    statusProc.command = ["pgrep", "--count", "-x", "wvkbd-mobintl"]
+    statusProc.command = ["pgrep", "--count", "-x", root.binary]
     statusProc.running = true
   }
 
   function toggle() {
     if (!root.bar) return
-    root.bar.run("sh -c 'pgrep -x wvkbd-mobintl >/dev/null && pkill -x wvkbd-mobintl || wvkbd-mobintl -L "
-      + root.keyboardHeight + " -l " + root.layers + " --landscape-layers " + root.layers + "'")
+    root.bar.run("sh -c 'pgrep -x " + root.binary + " >/dev/null && pkill -x " + root.binary
+      + " || " + root.binary + " -L " + root.keyboardHeight + " -l " + root.layers
+      + " --landscape-layers " + root.layers + "'")
     refreshTimer.interval = 200
     refreshTimer.restart()
   }
