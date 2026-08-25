@@ -1,9 +1,9 @@
 {
   "schemaVersion": 1,
-  "id": "simon.wvkbd",
+  "id": "omarchy-wvkbd",
   "name": "Virtual Keyboard",
   "version": "1.0.0",
-  "author": "simon",
+  "author": "thesimonharms",
   "description": "Toggle the wvkbd on-screen keyboard from the bar",
   "kinds": [
     "bar-widget"

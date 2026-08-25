@@ -5,7 +5,7 @@ import qs.Ui
 
 BarWidget {
   id: root
-  moduleName: "simon.wvkbd"
+  moduleName: "omarchy-wvkbd"
 
   // Landscape keyboard height in pixels; override in the shell.json layout
   // entry: { "id": "simon.wvkbd", "height": 500 }
