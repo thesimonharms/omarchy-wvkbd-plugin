@@ -25,6 +25,8 @@ BarWidget {
     statusProc.running = true
   }
 
+  function toggle() {
+    if (!root.bar) return
     root.bar.run("sh -c 'pgrep -x wvkbd-mobintl >/dev/null && pkill -x wvkbd-mobintl || wvkbd-mobintl -L "
       + root.keyboardHeight + " -l " + root.layers + " --landscape-layers " + root.layers + "'")
     refreshTimer.interval = 200
