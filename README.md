@@ -34,14 +34,6 @@ widget doesn't appear immediately, restart the shell:
 omarchy restart shell
 ```
 
-### Optional keybinding
-
-Add to `~/.config/hypr/bindings.lua`:
-
-```lua
-o.bind("SUPER + SHIFT + K", "Toggle virtual keyboard", "omarchy-shell wvkbd toggle")
-```
-
 ### Configuration
 
 The keyboard height (landscape, in pixels) defaults to 400 and can be
