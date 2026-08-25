@@ -36,15 +36,21 @@ omarchy restart shell
 
 ### Configuration
 
-The keyboard height (landscape, in pixels) defaults to 400 and can be
-changed in `~/.config/omarchy/shell.json`:
+Settings are overrides on the layout entry in `~/.config/omarchy/shell.json`:
 
 ```json
 {
   "id": "omarchy-wvkbd",
-  "height": 500
+  "height": 500,
+  "layers": "fullwide"
 }
 ```
+
+- `height` — landscape keyboard height in pixels (default `400`)
+- `layers` — wvkbd layer(s), comma-separated (default `full`, a traditional
+  PC-style QWERTY with number row and modifiers). Run
+  `wvkbd-mobintl --list-layers` for all options, e.g. `fullwide` for
+  extra-wide keys, or `special,emoji` for the compact phone-style layout.
 
 ## Uninstall
 
