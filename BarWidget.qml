@@ -22,16 +22,37 @@ BarWidget {
   implicitWidth: button.implicitWidth
   implicitHeight: button.implicitHeight
 
+  // Settings are argv, not a shell string. Reject values that are not a
+  // simple process or layer name so they cannot change the command shape.
+  function safeBinary(name) {
+    return /^[A-Za-z0-9][A-Za-z0-9._-]*$/.test(String(name || ""))
+  }
+
+  function safeLayers(value) {
+    return /^[A-Za-z0-9][A-Za-z0-9,_-]*$/.test(String(value || ""))
+  }
+
   function refresh() {
+    if (!safeBinary(root.binary)) {
+      root.keyboardUp = false
+      return
+    }
     statusProc.command = ["pgrep", "--count", "-x", root.binary]
     statusProc.running = true
   }
 
   function toggle() {
-    if (!root.bar) return
-    root.bar.run("sh -c 'pgrep -x " + root.binary + " >/dev/null && pkill -x " + root.binary
-      + " || " + root.binary + " -L " + root.keyboardHeight + " -l " + root.layers
-      + " --landscape-layers " + root.layers + "'")
+    if (!safeBinary(root.binary) || !safeLayers(root.layers)) return
+    if (root.keyboardUp) {
+      Quickshell.execDetached(["pkill", "-x", root.binary])
+    } else {
+      Quickshell.execDetached([
+        root.binary,
+        "-L", String(root.keyboardHeight),
+        "-l", root.layers,
+        "--landscape-layers", root.layers
+      ])
+    }
     refreshTimer.interval = 200
     refreshTimer.restart()
   }
