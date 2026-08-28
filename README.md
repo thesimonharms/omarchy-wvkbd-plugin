@@ -24,14 +24,16 @@ The widget shows a keyboard icon in the bar:
 ## Requirements
 
 - Omarchy (or any Hyprland + Quickshell setup using the Omarchy shell)
-- The custom `wvkbd-pcintl` binary. Build and install it (needs root for
-  the install step, so it will prompt):
+- The custom `wvkbd-pcintl` binary. Build and install it to
+  `~/.local/bin` as your user (no root, no `pkexec`):
 
 ```bash
 git clone https://github.com/thesimonharms/omarchy-wvkbd-plugin.git
 cd omarchy-wvkbd-plugin/wvkbd-pcintl
 ./build.sh
 ```
+
+`~/.local/bin` must be on your `PATH`.
 
 ## Install
 
@@ -74,6 +76,12 @@ omarchy plugin remove omarchy-wvkbd --yes
 This removes the plugin from `~/.config/omarchy/plugins/omarchy-wvkbd/`,
 unloads it from the running shell, and drops it from your bar layout
 (shell.json keeps an automatic backup of the removed copy).
+
+Remove the keyboard binary if you installed it with `build.sh`:
+
+```bash
+rm -f ~/.local/bin/wvkbd-pcintl
+```
 
 ## License
 
